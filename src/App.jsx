@@ -1,0 +1,80 @@
+import {
+  createTheme,
+  CssBaseline,
+  Snackbar,
+  ThemeProvider,
+} from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { createBrowserRouter, RouterProvider } from 'react-router';
+
+import Login from './components/pages/Auth/Login';
+import SignUp from './components/pages/Auth/SignUp';
+import Dashboard from './components/pages/Dashboard';
+import Projects from './components/pages/Projects';
+import Settings from './components/pages/Settings';
+import DetailProject from './components/pages/Projects/DetailProject';
+import sidebarLoader from './components/layouts/SidebarLayout/SidebarLayout.loader';
+import authLoader from './components/layouts/AuthLayout/AuthLayout.loader';
+import SnackbarProvider from './components/ui/Snackbar';
+import detailProjectLoader from './components/pages/Projects/DetailProject/DetailProject.loader';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ['Roboto', 'sans-serif'].join(','),
+  },
+});
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    loader: sidebarLoader,
+    element: <Dashboard />,
+  },
+  {
+    path: '/login',
+    loader: authLoader,
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    loader: authLoader,
+    element: <SignUp />,
+  },
+
+  {
+    path: '/projects',
+    loader: sidebarLoader,
+    children: [
+      {
+        path: '/projects',
+        element: <Projects />,
+      },
+      {
+        path: '/projects/:id',
+        loader: detailProjectLoader,
+        element: <DetailProject />,
+      },
+    ],
+  },
+  {
+    path: '/settings',
+    loader: sidebarLoader,
+    element: <Settings />,
+  },
+]);
+
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <SnackbarProvider>
+          <CssBaseline />
+          <RouterProvider router={router} />
+        </SnackbarProvider>
+      </LocalizationProvider>
+    </ThemeProvider>
+  );
+};
+
+export default App;
