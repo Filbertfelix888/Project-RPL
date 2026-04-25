@@ -62,9 +62,10 @@ const DetailProjectProvider = ({ children }) => {
     try {
       setLoadingBoardLists(true);
       const response = await services.boards.lists(detailProjectData.public_id);
-      setBoardListData(response.data.data.Lists);
+      const lists = response?.data?.data?.Lists || [];
+      setBoardListData(lists);
 
-      const listIds = response.data.data.Lists.map((item) => {
+      const listIds = lists.map((item) => {
         return {
           internal_id: item.internal_id,
           public_id: item.public_id,
@@ -77,7 +78,7 @@ const DetailProjectProvider = ({ children }) => {
       const boardListWithCards = [];
 
       responseCards.forEach((response) => {
-        const cards = response.data.data;
+        const cards = response?.data?.data || [];
         cards.forEach((card) => {
           const cardExist = boardListWithCards.findIndex(
             (item) => item.public_id === card.public_id,
@@ -86,11 +87,13 @@ const DetailProjectProvider = ({ children }) => {
             const listIdx = listIds.findIndex(
               (list) => list.internal_id === card.list_internal_id,
             );
-            boardListWithCards.push({
-              ...card,
-              list_internal_id: listIds[listIdx].internal_id,
-              list_public_id: listIds[listIdx].public_id,
-            });
+            if (listIdx !== -1) {
+              boardListWithCards.push({
+                ...card,
+                list_internal_id: listIds[listIdx].internal_id,
+                list_public_id: listIds[listIdx].public_id,
+              });
+            }
           }
         });
       });

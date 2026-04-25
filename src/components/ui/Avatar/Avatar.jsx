@@ -39,6 +39,7 @@ function stringAvatar(name) {
 
 const Avatar = ({ text, onClick }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   const handlePopoverOpen = (e) => setAnchorEl(e.currentTarget);
   const handlePopoverClose = () => setAnchorEl(null);
