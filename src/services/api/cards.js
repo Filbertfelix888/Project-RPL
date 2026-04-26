@@ -8,7 +8,7 @@ const cards = {
     return network.put(`/api/v1/cards/${cardId}`, data);
   },
   async getDetail(cardId) {
-    return network.put(`/api/v1/cards/${cardId}`);
+    return network.get(`/api/v1/cards/${cardId}`);
   },
   async addAssignees(cardId, assignees) {
     return network.post(`/api/v1/cards/${cardId}/assignees`, {
