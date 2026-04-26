@@ -7,11 +7,12 @@ import DatePicker from '@/components/ui/Forms/DatePicker';
 import dayjs from 'dayjs';
 import { Delete } from '@mui/icons-material';
 import ModalTaskDetailProvider from './ModalTaskDetailContext';
+import ModalTaskDetailContainer from './ModalTaskDetailContainer';
 
 const ModalTaskDetail = () => {
   return(
     <ModalTaskDetailProvider>
-      <ModalTaskDetail />
+      <ModalTaskDetailContainer />
     </ModalTaskDetailProvider>
   )
 }
