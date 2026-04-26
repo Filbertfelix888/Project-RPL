@@ -53,7 +53,7 @@ const useModalTaskDetail = () => {
     setShowConfirmDelete(false);
     await detailProjectContext.fetchBoardLists();
   };
- 
+
   return {
     taskDetailData,
     isLoading,

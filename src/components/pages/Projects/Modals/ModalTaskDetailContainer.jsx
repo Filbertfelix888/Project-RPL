@@ -6,7 +6,8 @@ import datetime from '@/utils/datetime';
 import DatePicker from '@/components/ui/Forms/DatePicker';
 import dayjs from 'dayjs';
 import { Delete } from '@mui/icons-material';
-import ModalTaskDetailContainer from './ModalTaskDetailContainer';
+import TaskAssignees from './components/TaskAssignees';
+//import ModalTaskDetailContainer from './ModalTaskDetailContainer';
 
 const ModalTaskDetailContainer = () => {
   const {
@@ -25,8 +26,7 @@ const ModalTaskDetailContainer = () => {
     detailProjectData,
     isShowConfirmDelete,
     setShowConfirmDelete,
-    handleDeleteTask
-
+    handleDeleteTask,
   } = useModalTaskDetail();
 
   const renderTitle = () => {
@@ -243,22 +243,22 @@ const ModalTaskDetailContainer = () => {
           </Stack>
         ) : (
           <>
-          <Button
-            startIcon={<Delete />}
-            variant="outlined"
-            color="error"
-            onClick={() => setShowConfirmDelete(true)}
-            disabled={isLoading}
-          >
-            Hapus
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={handleClose}
-            disabled={isLoading}
-          >
-            Tutup
-          </Button>
+            <Button
+              startIcon={<Delete />}
+              variant="outlined"
+              color="error"
+              onClick={() => setShowConfirmDelete(true)}
+              disabled={isLoading}
+            >
+              Hapus
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={handleClose}
+              disabled={isLoading}
+            >
+              Tutup
+            </Button>
           </>
         )}
       </Stack>
@@ -289,6 +289,7 @@ const ModalTaskDetailContainer = () => {
         </Stack>
         <Stack width={'35%'} gap={2}>
           {renderDueDate()}
+          <TaskAssignees />
         </Stack>
       </Stack>
       {renderTaskDetailActions()}

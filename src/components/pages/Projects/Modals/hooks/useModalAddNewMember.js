@@ -1,10 +1,10 @@
-import { useLoaderData } from "react-router";
-import useDetailProjectContext from "../../DetailProject/hooks/useDetailProjectContext";
-import { useForm, useWatch } from "react-hook-form";
-import { useCallback, useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
-import { useSnackbar } from "@/components/ui/Snackbar";
-import services from "@/services";
+import { useLoaderData } from 'react-router';
+import useDetailProjectContext from '../../DetailProject/hooks/useDetailProjectContext';
+import { useForm, useWatch } from 'react-hook-form';
+import { useCallback, useEffect, useState } from 'react';
+import { useDebounce } from 'use-debounce';
+import { useSnackbar } from '@/components/ui/Snackbar';
+import services from '@/services';
 
 const useModalAddNewMember = () => {
   const detailProjectData = useLoaderData();
@@ -86,8 +86,8 @@ const useModalAddNewMember = () => {
     detailProjectData,
     usersData,
     debounceEmail,
-    setUsersData
-  }
+    setUsersData,
+  };
 };
 
 export default useModalAddNewMember;

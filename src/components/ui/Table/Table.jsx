@@ -21,8 +21,11 @@ const Table = ({ columns, data, isLoading }) => {
       <BaseTable sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
-            {columns.map((column,i) => (
-              <TableCell key={`${column.id}-${i}`} align={column.align || 'left'}>
+            {columns.map((column, i) => (
+              <TableCell
+                key={`${column.id}-${i}`}
+                align={column.align || 'left'}
+              >
                 {column.label}
               </TableCell>
             ))}
@@ -34,8 +37,11 @@ const Table = ({ columns, data, isLoading }) => {
               key={row.id}
               sx={{ '&:last-child td, &: last-child th': { border: 0 } }}
             >
-              {columns.map((column,i) => (
-                <TableCell key={`${column.id}-${i}`} align={column.align || 'left'}>
+              {columns.map((column, i) => (
+                <TableCell
+                  key={`${column.id}-${i}`}
+                  align={column.align || 'left'}
+                >
                   {column.render ? column.render(row) : row[column.id]}
                 </TableCell>
               ))}

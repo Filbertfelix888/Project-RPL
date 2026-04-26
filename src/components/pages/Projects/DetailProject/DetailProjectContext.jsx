@@ -152,7 +152,7 @@ const DetailProjectProvider = ({ children }) => {
           const boardListDataIds = updateBoardListData.map(
             (item) => item.public_id,
           );
-          await services.boards.updateListsPosition(
+          await services.boards.updateListPosition(
             detailProjectData.public_id,
             boardListDataIds,
           );
