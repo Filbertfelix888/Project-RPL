@@ -18,8 +18,9 @@ const useModalTaskDetail = () => {
   const detailProjectContext = useDetailProjectContext();
   const modalTaskDetailContext = useModalTaskDetailContext();
 
-  const { taskId, listId, taskDetailData, fetchTaskDetail } = modalTaskDetailContext;
-  
+  const { taskId, listId, taskDetailData, fetchTaskDetail } =
+    modalTaskDetailContext;
+
   const formTask = useForm();
 
   const onSubmit = async (values) => {
@@ -76,7 +77,6 @@ const useModalTaskDetail = () => {
     onSubmit,
     handleDeleteTask,
     handleClose,
-
   };
 };
 

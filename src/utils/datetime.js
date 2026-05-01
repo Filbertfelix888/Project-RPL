@@ -20,6 +20,12 @@ const datetime = {
     const end = dayjs(endDate).tz(TZ_ASIA_JAKARTA);
     return end.diff(start, 'day') + 1;
   },
+  getNow() {
+    return dayjs()
+  },
+  isSameOrAfter(startDate, endDate) {
+    return dayjs(startDate).isSameOrAfter(dayjs(endDate));
+  }
 };
 
 export default datetime;

@@ -11,18 +11,14 @@ import DashboardPanel from './DashboardPanel';
 import ProjectBoardPanel from './ProjectBoardPanel';
 
 const DetailProjectContainer = () => {
-
   const [activeTab, setActiveTab] = useState(2);
 
   const handleChangeTab = (_, newValue) => {
     setActiveTab(newValue);
-  }
+  };
 
-  const {
-    detailProjectData,
-    detailProjectContext,
-  } = useDetailProjectContainer();
-
+  const { detailProjectData, detailProjectContext } =
+    useDetailProjectContainer();
 
   return (
     <>
@@ -38,17 +34,15 @@ const DetailProjectContainer = () => {
           },
         ]}
       >
-   
-
-            <TabContext value={activeTab}>
-              <TabList onChange={handleChangeTab}>
-                <Tab label= "Dashboard" value={1} />
-                <Tab label= "Project" value={2} />
-              </TabList>
-              <DashboardPanel value={1}/>
-              <ProjectBoardPanel value={2}/>
-            </TabContext>
-
+        <TabContext value={activeTab}>
+          <TabList onChange={handleChangeTab}>
+            <Tab label="Dashboard" value={1} />
+            <Tab label="Project" value={2} />
+          </TabList>
+          {
+            activeTab === 1 ? <Dashboard /> : <ProjectBoardPanel value={2} />           
+          }
+        </TabContext>
       </SidebarLayout>
       <ModalTaskDetail />
     </>
