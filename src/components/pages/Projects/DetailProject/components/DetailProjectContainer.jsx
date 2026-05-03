@@ -7,7 +7,7 @@ import useDetailProjectContainer from '../hooks/useDetailProjectContainer';
 
 import ModalTaskDetail from '../../Modals/ModalTaskDetail';
 import { useState } from 'react';
-import DashboardPanel from './DashboardPanel';
+import Dashboard from './Dashboard';
 import ProjectBoardPanel from './ProjectBoardPanel';
 
 const DetailProjectContainer = () => {
