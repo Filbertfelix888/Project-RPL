@@ -16,7 +16,7 @@ const useDashboardData = () => {
   const mergeListAndTaskData = useMemo(() => {
     const taskItems = boardListData.map((item) => {
       const { title, public_id } = item;
-      const tasks = getTaskItemsByListId(public_id);
+      const tasks = getTaskItemsByListId(public_id) || [];
       return {
         ...item,
         title,
@@ -26,11 +26,12 @@ const useDashboardData = () => {
     });
 
     return taskItems;
-  }, [boardListData]);
+  }, [boardListData, getTaskItemsByListId]);
 
   const taskPercentageSummary = useMemo(() => {
     const taskItems = mergeListAndTaskData;
     const taskItemsTotal = taskItems.reduce((a, b) => a + b.count, 0);
+    if (taskItemsTotal === 0) return [];
     const result = [...taskItems].map((item) => ({
       name: item.title,
       count: item.count,
@@ -39,53 +40,56 @@ const useDashboardData = () => {
     return result;
   }, [mergeListAndTaskData]);
 
-
-  const initDashboardData = useCallback(async() => {
+  const initDashboardData = useCallback(async () => {
     if (mergeListAndTaskData.length > 0 && !isLoadingBoardLists) {
       let workload = [];
       const tasks = [];
       const overdueTasks = [];
       const dueSoonTasks = [];
 
-      for (const idx in mergeListAndTaskData) {
-        const items = mergeListAndTaskData [idx];
+      for (const list of mergeListAndTaskData) {
         const fetchTasks = await Promise.all(
-          [...items].map((item) => services.cards.getDetail(item.public_id))
+          (list.tasks || []).map((task) =>
+            services.cards.getDetail(task.public_id)
+          )
         );
 
-        const taskData = fetchTasks.map((item) => item?.data?.data);
+        const taskData = fetchTasks
+          .map((res) => res?.data?.data)
+          .filter(Boolean);
 
-        taskData.forEach((item) => tasks.push(item));
+        tasks.push(...taskData);
       }
 
-      for (const idx in tasks) {
-        const taskItem = tasks[idx];
+      for (const taskItem of tasks) {
+        if (!taskItem) continue;
+
         workload = transformTasksToWorkloadData(tasks, taskItem.internal_id);
 
         const now = datetime.getNow();
-        const isOvedue = datetime.isSameOrAfter(
+        const isOverdue = datetime.isSameOrAfter(
           now.toISOString(),
-          taskItem.due_date,
+          taskItem.due_date
         );
         const diff = datetime.getDiff(now.toISOString(), taskItem.due_date);
 
-        if (isOvedue) {
+        if (isOverdue) {
           overdueTasks.push(taskItem);
         } else if (diff <= 3 && diff >= 1) {
           dueSoonTasks.push(taskItem);
         }
-
       }
+
       setWorkloadSummary(workload);
       setOverdueTasksSummary(overdueTasks);
       setDueSoonTasksSummary(dueSoonTasks);
       setTotalTaskSummary(tasks);
     }
-  }, [mergeListAndTaskData]);
+  }, [mergeListAndTaskData, isLoadingBoardLists]);
 
   useEffect(() => {
     initDashboardData();
-  }, [mergeListAndTaskData, isLoadingBoardLists]);
+  }, [initDashboardData, mergeListAndTaskData, isLoadingBoardLists]);
 
   return {
     totalTaskSummary,

@@ -34,10 +34,10 @@ const Dashboard = () => {
                     <Typography variant="h5">Sebaran tugas</Typography>
                     <DashboardTaskPercentage data={taskPercentageSummary} />
                 </Stack>
-                <Stack gap={3} flex={1}>
+                {/* <Stack gap={3} flex={1}>
                     <Typography variant="h5">Pembagian kerja</Typography>
                     <DashboardWorkload data={workloadSummary} />
-                </Stack>
+                </Stack> */}
             </Stack>
         </Stack>
     )
