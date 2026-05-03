@@ -30,14 +30,13 @@ const useDashboardData = () => {
 
   const taskPercentageSummary = useMemo(() => {
     const taskItems = mergeListAndTaskData;
-    const taskItemsTotal = taskItems.reduce((a, b) => {
-      return a + b.count;
-    }, 0);
+    const taskItemsTotal = taskItems.reduce((a, b) => a + b.count, 0);
     const result = [...taskItems].map((item) => ({
       name: item.title,
       count: item.count,
       value: Math.floor((item.count / taskItemsTotal) * 100),
     }));
+    return result;
   }, [mergeListAndTaskData]);
 
 

@@ -6,7 +6,7 @@ import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 const DashboardTaskPercentage = ({ data }) => {
   const RADIAN = Math.PI / 180;
 
-  const COLORS = useMemo(() => data.map(() => getRandomColor()), [data]);
+  const COLORS = useMemo(() => (data || []).map(() => getRandomColor()), [data]);
 
   const renderCustomizedLabel = (config) => {
     const { cx, cy, midAngle, innerRadius, outerRadius, percent } = config;
