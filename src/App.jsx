@@ -29,7 +29,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     loader: sidebarLoader,
-    element: <Dashboard />,
+    element: <Projects />,
   },
   {
     path: '/login',
@@ -41,7 +41,6 @@ const router = createBrowserRouter([
     loader: authLoader,
     element: <SignUp />,
   },
-
   {
     path: '/projects',
     loader: sidebarLoader,

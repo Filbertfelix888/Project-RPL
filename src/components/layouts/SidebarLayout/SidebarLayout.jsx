@@ -2,7 +2,7 @@ import { Box, Breadcrumbs, Link, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 
 import Navbar from './Navbar';
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 
 const SidebarLayout = ({ children, pageTitle = '', breadcrumbs = [] }) => {
   const navigate = useNavigate();
@@ -36,14 +36,15 @@ const SidebarLayout = ({ children, pageTitle = '', breadcrumbs = [] }) => {
   return (
     <>
       <Navbar />
-      <Sidebar />
+      {/* Sidebar dinonaktifkan sesuai permintaan pengguna */}
+      {/* <Sidebar /> */}
       <Box
         component={'main'}
         sx={{
-          marginLeft: 30,
-          marginTop: '4rem',
+          maxWidth: 2000,
+          margin: '4rem auto 0',
           paddingTop: 3,
-          paddingRight: 3,
+          px: 3,
           paddingBottom: 6,
           flexGrow: 1,
           flexShrink: 0,

@@ -12,25 +12,31 @@ const SidebarMenu = () => {
   return (
     <Box sx={{ width: 200, paddingTop: 1 }}>
       <MenuList>
-        <MenuItem onClick={() => navigate('/')} sx={{ position: 'relative' }}>
+        {/*
+          Mengomentari menu selain 'Daftar Proyek' sesuai permintaan.
+          Biarkan blok berikut sebagai referensi jika ingin mengembalikan.
+        */}
+        {/* <MenuItem onClick={() => navigate('/')} sx={{ position: 'relative' }}>
           <ListItemIcon>
             <Monitor fontSize="small" />
           </ListItemIcon>
           <ListItemText>Dashboard</ListItemText>
-        </MenuItem>
+        </MenuItem> */}
+
         <MenuItem onClick={() => navigate('/projects')}>
           <ListItemIcon>
             <Book fontSize="small" />
           </ListItemIcon>
           <ListItemText>Daftar Proyek</ListItemText>
         </MenuItem>
-        <Divider />
+
+        {/* <Divider />
         <MenuItem onClick={() => navigate('/settings')}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           <ListItemText>Pengaturan</ListItemText>
-        </MenuItem>
+        </MenuItem> */}
       </MenuList>
     </Box>
   );

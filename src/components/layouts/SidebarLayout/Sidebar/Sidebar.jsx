@@ -1,8 +1,10 @@
-import { Box } from '@mui/material';
-
-import SidebarMenu from './SidebarMenu';
+import { Box, MenuList, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Book } from '@mui/icons-material';
+import { useNavigate } from 'react-router';
+// import SidebarMenu from './SidebarMenu';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   return (
     <Box
       component={'aside'}
@@ -17,9 +19,22 @@ const Sidebar = () => {
         zIndex: 1000,
         paddingTop: '4rem', // Adjust for fixed navbar height
         background: '#ffffff',
+        width: 200,
+        display: 'flex',
+        alignItems: 'flex-start',
       }}
     >
-      <SidebarMenu />
+      {/* SidebarMenu dikomentari; hanya tampilkan link 'Daftar Proyek' */}
+      {/* <SidebarMenu /> */}
+
+      <MenuList>
+        <MenuItem onClick={() => navigate('/projects')}>
+          <ListItemIcon>
+            <Book fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Daftar Proyek</ListItemText>
+        </MenuItem>
+      </MenuList>
     </Box>
   );
 };
