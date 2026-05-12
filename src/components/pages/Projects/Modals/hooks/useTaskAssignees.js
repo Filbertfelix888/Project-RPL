@@ -4,7 +4,7 @@ import { useState } from 'react';
 import services from '@/services';
 
 const useTaskAssignees = () => {
-  const { fetchTaskDetail, taksId, membersData, taskDetailData } =
+  const { fetchTaskDetail, membersData, taskDetailData } =
     useModalTaskDetailContext();
 
   const formTaskAssignees = useForm({
@@ -16,12 +16,33 @@ const useTaskAssignees = () => {
   const [isLoading, setLoading] = useState(false);
   const [showFormAssigness, setShowFormAssignees] = useState(false);
 
-  const onSubmitTaskAssignees = async (values) => {
+const onSubmitTaskAssignees = async (values) => {
+  try {
+    console.log("TASK DETAIL:", taskDetailData);
+    console.log("PUBLIC ID:", taskDetailData?.public_id);
+    console.log("VALUES:", values);
+    console.log("MEMBERS:", values.members);
+
+    if (!taskDetailData?.public_id) {
+      console.error("public_id tidak ditemukan");
+      return;
+    }
+
     setLoading(true);
-    await services.cards.addAssignees(taskDetailData.public_id, values.members);
-    await fetchTaskDetail(taksId);
+
+    await services.cards.addAssignees(
+      taskDetailData.public_id,
+      values.members
+    );
+
+    await fetchTaskDetail(taskDetailData.public_id);
+
+  } catch (error) {
+    console.error("ERROR ASSIGNEE:", error);
+  } finally {
     setLoading(false);
-  };
+  }
+};
 
   return {
     isLoading,

@@ -1,4 +1,4 @@
-import services from '@/services';
+import services from '@/services'; // Kamu mengimport sebagai 'services'
 import { createContext, useEffect, useState } from 'react';
 import { useLoaderData, useSearchParams } from 'react-router';
 
@@ -21,31 +21,53 @@ const ModalTaskDetailProvider = ({ children }) => {
   const [taskDetailData, setTaskDetailData] = useState({});
   const [membersData, setMembersData] = useState([]);
 
-  const boardId = detailProjectData.public_id;
+  const boardId = detailProjectData?.public_id; // Tambahkan optional chaining agar aman
 
   const taskId = SearchParams.get('taskId');
   const listId = SearchParams.get('listId');
 
-  const fetchTaskDetail = async (taskId) => {
-    const response = await services.cards.getDetail(taskId);
-    setTaskDetailData(response.data.data);
+  const fetchTaskDetail = async (id) => {
+    try {
+      // PERBAIKAN: Gunakan services.cards
+      const response = await services.cards.getDetail(id);
+      
+      if (!response || !response.data) {
+        console.log("Response kosong atau tidak valid.");
+        return; 
+      }
+
+      // Pastikan struktur response backend kamu memang response.data.data
+      setTaskDetailData(response.data.data || {});
+    } catch (error) {
+      console.error("Gagal ambil detail task:", error);
+    }
   };
 
-  const fetchProjectMembers = async (boardId) => {
-    const response = await services.boards.getMembers(boardId);
-    setMembersData(response.data.data);
+  const fetchProjectMembers = async (bId) => {
+    try {
+      const response = await services.boards.getMembers(bId);
+      if (response && response.data) {
+        setMembersData(response.data.data || []);
+      }
+    } catch (error) {
+      console.error("Gagal ambil members:", error);
+    }
   };
 
   const initTaskDetail = async () => {
-    await fetchTaskDetail(taskId);
-    await fetchProjectMembers(boardId);
+    // Jalankan secara paralel agar lebih cepat
+    await Promise.all([
+      fetchTaskDetail(taskId),
+      fetchProjectMembers(boardId)
+    ]);
   };
 
   useEffect(() => {
-    if (taskId && listId && boardId) {
+    // Validasi ketat: pastikan semua ID benar-benar ada dan bukan string "undefined"
+    if (taskId && taskId !== 'undefined' && boardId) {
       initTaskDetail();
     }
-  }, [taskId, listId, boardId]);
+  }, [taskId, boardId]); // listId dihapus dari dependency jika tidak dipakai untuk fetch
 
   return (
     <ModalTaskDetailContext.Provider
@@ -56,6 +78,7 @@ const ModalTaskDetailProvider = ({ children }) => {
         fetchTaskDetail,
         fetchProjectMembers,
         membersData,
+        setTaskDetailData, // Tambahkan ini jika butuh update manual dari UI
       }}
     >
       {children}
