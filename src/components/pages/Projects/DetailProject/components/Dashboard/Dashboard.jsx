@@ -29,16 +29,49 @@ const Dashboard = () => {
                     color={'#ffa000'}
                 />
             </Stack>
-            <Stack direction={'row'} gap={1} height={500}>
-                <Stack gap={3} flex={1}>
-                    <Typography variant="h5">Sebaran tugas</Typography>
-                    <DashboardTaskPercentage data={taskPercentageSummary} />
-                </Stack>
-                {/* <Stack gap={3} flex={1}>
-                    <Typography variant="h5">Pembagian kerja</Typography>
-                    <DashboardWorkload data={workloadSummary} />
-                </Stack> */}
-            </Stack>
+            <Stack
+    direction={'row'}
+    gap={1}
+    sx={{
+        width: '100%',
+        height: 500,
+        minHeight: 500,
+    }}
+>
+    <Stack
+        gap={3}
+        flex={1}
+        sx={{
+            minWidth: 0,
+            height: '100%',
+        }}
+    >
+        <Typography variant="h5">
+            Sebaran tugas
+        </Typography>
+
+        <DashboardTaskPercentage
+            data={taskPercentageSummary}
+        />
+    </Stack>
+
+    <Stack
+        gap={3}
+        flex={1}
+        sx={{
+            minWidth: 0,
+            height: '100%',
+        }}
+    >
+        <Typography variant="h5">
+            Pembagian kerja
+        </Typography>
+
+        <DashboardWorkload
+            data={workloadSummary}
+        />
+    </Stack>
+</Stack>
         </Stack>
     )
 }

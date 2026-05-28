@@ -6,7 +6,7 @@ import datetime from '@/utils/datetime';
 
 const useDashboardData = () => {
   const [totalTaskSummary, setTotalTaskSummary] = useState([]);
-  const [workloadSumarry, setWorkloadSummary] = useState([]);
+  const [workloadSummary, setWorkloadSummary] = useState([]);
   const [overdueTasksSummary, setOverdueTasksSummary] = useState([]);
   const [dueSoonTasksSummary, setDueSoonTasksSummary] = useState([]);
 
@@ -64,7 +64,7 @@ const useDashboardData = () => {
       for (const taskItem of tasks) {
         if (!taskItem) continue;
 
-        workload = transformTasksToWorkloadData(tasks, taskItem.internal_id);
+        workload = transformTasksToWorkloadData(tasks);
 
         const now = datetime.getNow();
         const isOverdue = datetime.isSameOrAfter(
@@ -80,6 +80,10 @@ const useDashboardData = () => {
         }
       }
 
+      console.log(workload)
+
+      console.log("WORKLOAD =", workload);
+
       setWorkloadSummary(workload);
       setOverdueTasksSummary(overdueTasks);
       setDueSoonTasksSummary(dueSoonTasks);
@@ -93,7 +97,7 @@ const useDashboardData = () => {
 
   return {
     totalTaskSummary,
-    workloadSumarry,
+    workloadSummary,
     overdueTasksSummary,
     dueSoonTasksSummary,
     taskPercentageSummary,
