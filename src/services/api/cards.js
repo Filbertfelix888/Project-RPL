@@ -11,6 +11,11 @@ const cards = {
     return network.put(`/api/v1/cards/${cardId}`, data);
   },
 
+  async remove(cardId) {
+    if (!cardId || cardId === 'undefined') return;
+    return network.delete(`/api/v1/cards/${cardId}`);
+  },
+
   async getDetail(cardId) {
     // Validasi: Jangan tembak kalau cardId kosong, null, atau string "undefined"
     if (!cardId || cardId === 'undefined') {
