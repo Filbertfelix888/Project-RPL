@@ -2,7 +2,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { Box, colors, Paper, Stack, Typography } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 import useTaskItems from '../hooks/useTaskItems';
 import TaskSortableItem from './TaskSortableItem';
 import { DRAG_CARD } from '@/utils/constants';
@@ -31,12 +31,12 @@ const TaskItems = ({ listDroppable, listItem }) => {
         >
           <Paper
             elevation={0}
-            sx={{
+            sx={(t) => ({
               p: 1,
-              bgcolor: colors.blue[50],
+              bgcolor: t.palette.background.paper,
               borderStyle: 'dashed',
-              borderColor: colors.blue[200],
-            }}
+              borderColor: t.palette.divider,
+            })}
           >
             <Stack
               sx={{
@@ -45,11 +45,7 @@ const TaskItems = ({ listDroppable, listItem }) => {
                 justifyContent: 'center',
               }}
             >
-              <Typography
-                variant="body1"
-                fontWeight={600}
-                color={colors.blue[800]}
-              >
+              <Typography variant="body1" fontWeight={600} sx={{ color: (t) => t.palette.text.primary }}>
                 {listItem.title}
               </Typography>
             </Stack>

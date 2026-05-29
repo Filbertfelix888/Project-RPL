@@ -64,17 +64,17 @@ const ModalTaskDetailContainer = () => {
             </Stack>
           </Box>
         ) : (
-          <Typography
+            <Typography
             component={'a'}
             variant="body2"
             sx={{
               display: 'block',
-              ':hover': {
-                background: colors.grey[100],
-                cursor: 'pointer',
-                p: 1,
-                borderRadius: 1,
-              },
+                ':hover': (t) => ({
+                  background: t.palette.action.hover,
+                  cursor: 'pointer',
+                  p: 1,
+                  borderRadius: 1,
+                }),
             }}
             onClick={() => setEditTitle(true)}
           >
@@ -122,17 +122,17 @@ const ModalTaskDetailContainer = () => {
             </Stack>
           </Box>
         ) : (
-          <Typography
+            <Typography
             component={'a'}
             variant="body2"
             sx={{
               display: 'block',
-              ':hover': {
-                background: colors.grey[100],
-                cursor: 'pointer',
-                p: 1,
-                borderRadius: 1,
-              },
+                ':hover': (t) => ({
+                  background: t.palette.action.hover,
+                  cursor: 'pointer',
+                  p: 1,
+                  borderRadius: 1,
+                }),
             }}
             onClick={() => setEditDescription(true)}
           >
@@ -182,17 +182,17 @@ const ModalTaskDetailContainer = () => {
             </Stack>
           </Box>
         ) : (
-          <Typography
+            <Typography
             component={'a'}
             variant="body2"
             sx={{
               display: 'block',
-              ':hover': {
-                background: colors.grey[100],
-                cursor: 'pointer',
-                p: 1,
-                borderRadius: 1,
-              },
+                ':hover': (t) => ({
+                  background: t.palette.action.hover,
+                  cursor: 'pointer',
+                  p: 1,
+                  borderRadius: 1,
+                }),
             }}
             onClick={() => setEditDueDate(true)}
           >
@@ -209,13 +209,13 @@ const ModalTaskDetailContainer = () => {
   const renderTaskDetailActions = () => {
     return (
       <Stack
-        sx={{
+        sx={(t) => ({
           position: 'sticky',
           bottom: 0,
-          background: 'white',
+          background: t.palette.background.paper,
           p: 2,
-          borderTop: `1px solid ${colors.grey[300]}`,
-        }}
+          borderTop: `1px solid ${t.palette.divider}`,
+        })}
         direction={'row'}
         justifyContent={'flex-end'}
         gap={1}

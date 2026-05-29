@@ -1,5 +1,5 @@
 import { Check, Close, Delete } from '@mui/icons-material';
-import { Box, colors, IconButton, Stack, Typography } from '@mui/material';
+import { Box, IconButton, Stack, Typography } from '@mui/material';
 import useListSortableItem from '../hooks/useListSortableItem';
 import { CSS } from '@dnd-kit/utilities';
 import TaskItems from './TaskItems';
@@ -49,7 +49,7 @@ const ListSortableItem = ({ id, item }) => {
 
   return (
     <Box
-      sx={{
+      sx={(t) => ({
         transform: CSS.Translate.toString(sortable.transform),
         transition: sortable.transition,
         flexBasis: 300,
@@ -58,8 +58,8 @@ const ListSortableItem = ({ id, item }) => {
         borderRadius: 1,
         px: 0.5,
         mx: -0.5,
-        background: colors.grey[50],
-      }}
+        background: t.palette.background.paper,
+      })}
       ref={sortable.setNodeRef}
       {...sortable.attributes}
       {...sortable.listeners}
@@ -69,12 +69,12 @@ const ListSortableItem = ({ id, item }) => {
         justifyContent={'space-between'}
         alignItems={'center'}
         p={2}
-        borderBottom={`1px solid ${colors.grey[300]}`}
-        sx={{
+        borderBottom={(t) => `1px solid ${t.palette.divider}`}
+        sx={(t) => ({
           cursor: 'grab',
           borderTopRightRadius: 1,
           borderTopLeftRadius: 1,
-        }}
+        })}
       >
         <Stack direction={'row'} alignItems={'center'} gap={1}>
           <Typography variant="body1" fontWeight={600}>
@@ -83,12 +83,12 @@ const ListSortableItem = ({ id, item }) => {
           <Stack
             justifyContent={'center'}
             alignItems={'center'}
-            sx={{
+            sx={(t) => ({
               width: 26,
               height: 26,
               borderRadius: 1,
-              backgroundColor: colors.orange[100],
-            }}
+              backgroundColor: t.palette.warning.light,
+            })}
           >
             <Typography variant="caption" fontWeight={600}>
               {taskItems.length}

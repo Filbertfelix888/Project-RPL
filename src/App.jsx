@@ -1,9 +1,5 @@
-import {
-  createTheme,
-  CssBaseline,
-  Snackbar,
-  ThemeProvider,
-} from '@mui/material';
+import React, { useMemo, useState } from 'react';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { createBrowserRouter, RouterProvider } from 'react-router';
@@ -18,14 +14,37 @@ import sidebarLoader from './components/layouts/SidebarLayout/SidebarLayout.load
 import authLoader from './components/layouts/AuthLayout/AuthLayout.loader';
 import SnackbarProvider from './components/ui/Snackbar';
 import detailProjectLoader from './components/pages/Projects/DetailProject/DetailProject.loader';
+import ColorModeContext from '@/contexts/ThemeContext';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: ['Roboto', 'sans-serif'].join(','),
-  },
-});
+const App = () => {
+  const stored = typeof window !== 'undefined' ? localStorage.getItem('paletteMode') : null;
+  const [mode, setMode] = useState(stored || 'light');
 
-const router = createBrowserRouter([
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prev) => {
+          const next = prev === 'light' ? 'dark' : 'light';
+          try { localStorage.setItem('paletteMode', next); } catch (e) {}
+          return next;
+        });
+      },
+    }),
+    []
+  );
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: { mode },
+        typography: {
+          fontFamily: ['Roboto', 'sans-serif'].join(','),
+        },
+      }),
+    [mode]
+  );
+
+  const router = createBrowserRouter([
   {
     path: '/',
     loader: sidebarLoader,
@@ -63,16 +82,17 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <SnackbarProvider>
-          <CssBaseline />
-          <RouterProvider router={router} />
-        </SnackbarProvider>
-      </LocalizationProvider>
-    </ThemeProvider>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <SnackbarProvider>
+            <CssBaseline />
+            <RouterProvider router={router} />
+          </SnackbarProvider>
+        </LocalizationProvider>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 };
 

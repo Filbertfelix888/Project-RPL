@@ -1,4 +1,4 @@
-import { Button, colors, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import useTaskAssignees from '../hooks/useTaskAssignees';
 import { Person, PlusOne } from '@mui/icons-material';
 import Select from '@/components/ui/Forms/Select';
@@ -25,11 +25,11 @@ const TaskAssignees = () => {
             direction={'row'}
             justifyContent={'space-between'}
             alignItems={'center'}
-            sx={{
-              border: `1px solid ${colors.grey[300]}`,
+            sx={(t) => ({
+              border: `1px solid ${t.palette.divider}`,
               borderRadius: 1,
               p: 1,
-            }}
+            })}
           >
             <Stack
               direction={'row'}
@@ -38,12 +38,7 @@ const TaskAssignees = () => {
               gap={2}
             >
               <Person />
-              <Typography
-                variant="body2"
-                sx={{
-                  color: colors.grey[700],
-                }}
-              >
+              <Typography variant="body2" sx={{ color: (t) => t.palette.text.primary }}>
                 {item.user.name}
               </Typography>
             </Stack>

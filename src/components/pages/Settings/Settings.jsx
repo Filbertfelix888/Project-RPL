@@ -12,12 +12,7 @@ const Settings = () => {
         },
       ]}
     >
-      <Paper
-        sx={{
-          padding: 2,
-          background: colors.lightBlue[100],
-        }}
-      >
+      <Paper sx={{ padding: 2, background: (t) => t.palette.background.paper }}>
         <Typography>Menampilkan settings di sini</Typography>
       </Paper>
     </SidebarLayout>

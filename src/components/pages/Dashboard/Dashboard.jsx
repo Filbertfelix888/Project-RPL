@@ -5,12 +5,7 @@ import SidebarLayout from '@/components/layouts/SidebarLayout';
 const Dashboard = () => {
   return (
     <SidebarLayout pageTitle="Dashboard">
-      <Paper
-        sx={{
-          padding: 2,
-          background: colors.lightBlue[100],
-        }}
-      >
+      <Paper sx={{ padding: 2, background: (t) => t.palette.background.paper }}>
         <Typography>Menampilkan dashboard di sini</Typography>
       </Paper>
     </SidebarLayout>

@@ -1,10 +1,12 @@
 import { Box, MenuList, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Book } from '@mui/icons-material';
 import { useNavigate } from 'react-router';
 // import SidebarMenu from './SidebarMenu';
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
   return (
     <Box
       component={'aside'}
@@ -15,10 +17,10 @@ const Sidebar = () => {
         height: '100vh',
         flexGrow: 0,
         flexShrink: 0,
-        borderRight: '1px solid #ccc',
+        borderRight: (t) => `1px solid ${t.palette.divider}`,
         zIndex: 1000,
         paddingTop: '4rem', // Adjust for fixed navbar height
-        background: '#ffffff',
+        background: (t) => t.palette.background.paper,
         width: 200,
         display: 'flex',
         alignItems: 'flex-start',
