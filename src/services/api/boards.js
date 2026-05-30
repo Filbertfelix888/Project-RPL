@@ -15,6 +15,10 @@ const boards = {
     return network.put(`/api/v1/boards/${boardID}`, data);
   },
 
+  async delete(boardID) {
+    return network.delete(`/api/v1/boards/${boardID}`);
+  },
+  
   async detail(boardID) {
     return network.get(`/api/v1/boards/${boardID}`);
   },
