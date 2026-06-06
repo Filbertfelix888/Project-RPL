@@ -10,23 +10,26 @@ const Dashboard = () => {
     return (
         <Stack width={'100%'} gap={3} mt={5}>
             <Stack direction={'row'} gap={1} justifyContent={'stretch'} alignItems={'stretch'}>
-                <DashboardMetric 
+                <DashboardMetric
                     title={'Total Tugas Proyek'}
                     value={totalTaskSummary.length}
                     icon={Assignment}
                     color={'#1976d2'}
+                    tasks={totalTaskSummary}
                 />
-                <DashboardMetric 
+                <DashboardMetric
                     title={'Total Tugas Melebihi Batas Waktu'}
                     value={overdueTasksSummary.length}
                     icon={AccessTimeFilled}
                     color={'#d32f2f'}
+                    tasks={overdueTasksSummary}
                 />
-                <DashboardMetric 
+                <DashboardMetric
                     title={'Total Tugas Mendekati Batas Waktu'}
                     value={dueSoonTasksSummary.length}
                     icon={WarningAmber}
                     color={'#ffa000'}
+                    tasks={dueSoonTasksSummary}
                 />
             </Stack>
             <Stack

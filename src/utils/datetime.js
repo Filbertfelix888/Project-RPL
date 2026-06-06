@@ -29,10 +29,15 @@ const datetime = {
       dayjs(endDate).tz(TZ_ASIA_JAKARTA)
     );
   },
-   getDiff(startDate, endDate) {
+  getDiff(startDate, endDate) {
     const start = dayjs(startDate).tz(TZ_ASIA_JAKARTA);
     const end = dayjs(endDate).tz(TZ_ASIA_JAKARTA);
     return end.diff(start, 'day');
+  },
+  getDiffCalendarDays(dueDate) {
+    const now = dayjs().tz(TZ_ASIA_JAKARTA).startOf('day');
+    const end = dayjs(dueDate).tz(TZ_ASIA_JAKARTA).startOf('day');
+    return end.diff(now, 'day');
   }
 };
 

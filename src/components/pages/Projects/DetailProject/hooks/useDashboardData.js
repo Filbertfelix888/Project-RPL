@@ -66,16 +66,11 @@ const useDashboardData = () => {
 
         workload = transformTasksToWorkloadData(tasks);
 
-        const now = datetime.getNow();
-        const isOverdue = datetime.isSameOrAfter(
-          now.toISOString(),
-          taskItem.due_date
-        );
-        const diff = datetime.getDiff(now.toISOString(), taskItem.due_date);
+        const diffDays = datetime.getDiffCalendarDays(taskItem.due_date);
 
-        if (isOverdue) {
+        if (diffDays <= 0) {
           overdueTasks.push(taskItem);
-        } else if (diff <= 3 && diff >= 1) {
+        } else if (diffDays <= 3) {
           dueSoonTasks.push(taskItem);
         }
       }
