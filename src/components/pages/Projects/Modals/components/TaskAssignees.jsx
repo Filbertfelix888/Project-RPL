@@ -56,7 +56,7 @@ const TaskAssignees = () => {
             name={'members'}
             label={'Pilih member'}
             options={membersData?.map((item) => ({
-              label: item.name,
+              label: item.email ? `${item.name} - ${item.email}` : item.name,
               value: item.public_id,
             }))}
             size={'small'}
