@@ -131,7 +131,7 @@ const Projects = () => {
               label: 'Tanggal dibuat',
               render(data) {
                 return (
-                  <Box>{datetime.format(data.created_at, 'DD/MM/YYYY')}</Box>
+                  <Box>{datetime.format(data.created_at, 'DD-MMM-YYYY')}</Box>
                 );
               },
             },

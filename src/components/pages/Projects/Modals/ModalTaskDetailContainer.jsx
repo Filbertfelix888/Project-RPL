@@ -199,7 +199,7 @@ const ModalTaskDetailContainer = () => {
             {taskDetailData.due_date &&
             taskDetailData.due_date === '0001-01-01T00:00:00Z'
               ? 'Belum ada deadline, klik untuk menambahkan'
-              : datetime.format(taskDetailData.due_date, 'DD MMMM YYYY')}
+              : datetime.format(taskDetailData.due_date, 'DD-MMM-YYYY')}
           </Typography>
         )}
       </Stack>

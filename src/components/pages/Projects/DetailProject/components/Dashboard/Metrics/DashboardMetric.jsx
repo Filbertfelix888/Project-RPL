@@ -16,7 +16,7 @@ const TaskTooltipContent = ({ tasks }) => {
                     </Typography>
                     <Typography variant="caption" display="block" sx={{ opacity: 0.8 }}>
                         {task.due_date && task.due_date !== '0001-01-01T00:00:00Z'
-                            ? datetime.format(task.due_date, 'DD MMM YYYY')
+                            ? datetime.format(task.due_date, 'DD-MMM-YYYY')
                             : 'Tidak ada deadline'}
                     </Typography>
                 </Box>

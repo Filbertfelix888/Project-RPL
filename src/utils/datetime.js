@@ -10,7 +10,7 @@ dayjs.extend(isSameOrAfter);
 const TZ_ASIA_JAKARTA = 'Asia/Jakarta';
 
 const datetime = {
-  format(dateValue, format = 'DD/MM/YYYY') {
+  format(dateValue, format = 'DD-MMM-YYYY') {
     return dayjs(dateValue).tz(TZ_ASIA_JAKARTA).format(format);
   },
   getIsoString(dateValue) {
