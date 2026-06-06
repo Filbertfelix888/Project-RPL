@@ -20,7 +20,7 @@ const DashboardWorkload = ({ data }) => {
 
           <XAxis dataKey="assignee" />
 
-          <YAxis />
+          <YAxis allowDecimals={false} />
 
           <Tooltip />
 
